@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!--
+  ~ Lexmark Confidential
+  ~
+  ~ Copyright (c) 2017 Lexmark International Inc.
+  ~
+  ~ All Rights Reserved.
+  -->
+
+<!--[if lt IE 7]><html xmlns:th="http://www.thymeleaf.org" class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]><html xmlns:th="http://www.thymeleaf.org" class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]><html xmlns:th="http://www.thymeleaf.org" class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns:th="http://www.thymeleaf.org" class="no-js" lang=""> <!--<![endif]-->
+<head th:replace="fragments/headerinc :: head"></head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table">
+                    <thead>
+
+                        <tr>
+                            <th th:text="${matchup.homeTeam}" colspan="4"></th>
+                            <th colspan="2"></th>
+                            <th th:text="${matchup.awayTeam}" colspan="4"></th>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Points</th>
+                            <th>Floor</th>
+                            <th>Ceiling</th>
+                            <th colspan="2"></th>
+                            <th>Name</th>
+                            <th>Points</th>
+                            <th>Floor</th>
+                            <th>Ceiling</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <th:block th:each="projection, iter : ${matchup.homeStarters}">
+                            <tr>
+                                <td th:text="${projection.name}"></td>
+                                <td th:text="${projection.points}"></td>
+                                <td th:text="${projection.floor}"></td>
+                                <td th:text="${projection.ceiling}"></td>
+                                <td colspan="2"></td>
+                                <td th:text="${matchup.awayStarters.get(iter.index).name}"></td>
+                                <td th:text="${matchup.awayStarters.get(iter.index).points}"></td>
+                                <td th:text="${matchup.awayStarters.get(iter.index).floor}"></td>
+                                <td th:text="${matchup.awayStarters.get(iter.index).ceiling}"></td>
+                            </tr>
+                        </th:block>
+                        <tr>
+                            <td >Totals:</td>
+                            <td th:text="${matchup.homeStartersTotalPoints}"></td>
+                            <td th:text="${matchup.homeStartersTotalFloor}"></td>
+                            <td th:text="${matchup.homeStartersTotalCeiling}"></td>
+                            <td colspan="3"></td>
+                            <td th:text="${matchup.awayStartersTotalPoints}"></td>
+                            <td th:text="${matchup.awayStartersTotalFloor}"></td>
+                            <td th:text="${matchup.awayStartersTotalCeiling}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table">
+                    <thead>
+
+                    <tr>
+                        <th th:text="${matchup.homeTeam}" colspan="4"></th>
+                        <th colspan="2"></th>
+                        <th th:text="${matchup.awayTeam}" colspan="4"></th>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Points</th>
+                        <th>Floor</th>
+                        <th>Ceiling</th>
+                        <th colspan="2"></th>
+                        <th>Name</th>
+                        <th>Points</th>
+                        <th>Floor</th>
+                        <th>Ceiling</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="projection, iter : ${matchup.homeBench}">
+                        <tr>
+                            <td th:text="${projection.name}"></td>
+                            <td th:text="${projection.points}"></td>
+                            <td th:text="${projection.floor}"></td>
+                            <td th:text="${projection.ceiling}"></td>
+                            <td colspan="2"></td>
+                            <td th:text="${matchup.awayBench.get(iter.index).name}"></td>
+                            <td th:text="${matchup.awayBench.get(iter.index).points}"></td>
+                            <td th:text="${matchup.awayBench.get(iter.index).floor}"></td>
+                            <td th:text="${matchup.awayBench.get(iter.index).ceiling}"></td>
+                        </tr>
+                    </th:block>
+                    <tr>
+                        <td >Totals:</td>
+                        <td th:text="${matchup.homeBenchTotalPoints}"></td>
+                        <td th:text="${matchup.homeBenchTotalFloor}"></td>
+                        <td th:text="${matchup.homeBenchTotalCeiling}"></td>
+                        <td colspan="3"></td>
+                        <td th:text="${matchup.awayBenchTotalPoints}"></td>
+                        <td th:text="${matchup.awayBenchTotalFloor}"></td>
+                        <td th:text="${matchup.awayBenchTotalCeiling}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+
+                        <tr>
+                            <th colspan="4">Free Agents: QB</th>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Points</th>
+                            <th>Floor</th>
+                            <th>Ceiling</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="qb, iter : ${freeQBs}">
+                            <tr>
+                                <td th:text="${qb.name}"></td>
+                                <td th:text="${qb.points}"></td>
+                                <td th:text="${qb.floor}"></td>
+                                <td th:text="${qb.ceiling}"></td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+
+                        <tr>
+                            <th colspan="4">Free Agents: RB</th>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Points</th>
+                            <th>Floor</th>
+                            <th>Ceiling</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="rb, iter : ${freeRBs}">
+                            <tr>
+                                <td th:text="${rb.name}"></td>
+                                <td th:text="${rb.points}"></td>
+                                <td th:text="${rb.floor}"></td>
+                                <td th:text="${rb.ceiling}"></td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+
+                        <tr>
+                            <th colspan="4">Free Agents: WR</th>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Points</th>
+                            <th>Floor</th>
+                            <th>Ceiling</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="wr, iter : ${freeWRs}">
+                            <tr>
+                                <td th:text="${wr.name}"></td>
+                                <td th:text="${wr.points}"></td>
+                                <td th:text="${wr.floor}"></td>
+                                <td th:text="${wr.ceiling}"></td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
