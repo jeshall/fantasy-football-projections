@@ -8,6 +8,7 @@
 
 package com.fantasy.football.projections.fantasyfootballprojections.domain;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,24 +21,27 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Team {
+public class Performance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String teamId;
+    private String year;
 
-    private String name;
+    private String week;
 
-    private String division;
+    private Double floor;
 
-    private Integer wins;
+    private Double points;
 
-    private Integer losses;
+    private Double ceiling;
 
-    private Integer ties;
+    private Double actual;
 
-    @OneToOne
-    Roster roster;
+    private String outcome;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "player_id")
+    private Player player;
 }

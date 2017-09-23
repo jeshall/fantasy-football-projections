@@ -14,11 +14,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -40,6 +37,9 @@ public class Player {
 
     private String position;
 
-    @OneToOne(mappedBy = "id")
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Performance> performances;
+
+    @OneToOne
     private Roster roster;
 }

@@ -11,6 +11,7 @@ package com.fantasy.football.projections.fantasyfootballprojections.bootstrap;
 import com.fantasy.football.projections.fantasyfootballprojections.domain.Team;
 import com.fantasy.football.projections.fantasyfootballprojections.respositories.TeamRepository;
 import com.fantasy.football.projections.fantasyfootballprojections.services.ESPNFantasyClient;
+import com.fantasy.football.projections.fantasyfootballprojections.services.JRIClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -25,11 +26,15 @@ public class TeamUpdater implements ApplicationListener<ApplicationReadyEvent> {
     private ESPNFantasyClient espnFantasyClient;
 
     @Autowired
+    private JRIClient jriClient;
+
+    @Autowired
     private TeamRepository teamRepository;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
-        this.teamRepository.deleteAll();
-        List<Team> teams = this.teamRepository.save(this.espnFantasyClient.scrapeTeams());
+        List<Team> teams = this.espnFantasyClient.scrapeTeams();
+//        this.espnFantasyClient.scrapePlayers();
+        this.jriClient.scrapeData();
     }
 }
